@@ -1,0 +1,12 @@
+
+WindowDecorActionBar
+
+onCreate function, if there is codeline requestWindowFeature(), make sure its above super.onCreate code line
+
+setContentView is used before checking things on the view
+
+if problem with hiding action bar, need to add requestWindowFeature(Window.FEATURE_ACTION_BAR) before calling getSupportActionBar() (notice that getActionBar() may get error, suggest to use getSupportActionBar())
+
+First, you cannot use android.widget.ShareActionProvider with the appcompat-v7 action bar backport (e.g., ActionBarActivity). Either use the appcompat-v7 version of ShareActionProvider, or move everything over to the native action bar.
+
+Second, if you stick with appcompat-v7, then you cannot safely use getActionProvider(), as that method will not exist on API Level 10 and below. Replace menuItem.getActionProvider() with MenuItemCompat.getActionProvider(menuItem).
